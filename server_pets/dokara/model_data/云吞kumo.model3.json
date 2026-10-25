@@ -1,0 +1,131 @@
+{
+  "Version": 3,
+  "FileReferences": {
+    "Moc": "云吞kumo.moc3",
+    "Textures": [
+      "云吞kumo.4096/texture_00.png",
+      "云吞kumo.4096/texture_01.png",
+      "云吞kumo.4096/texture_02.png",
+      "云吞kumo.4096/texture_03.png",
+      "云吞kumo.4096/texture_04.png",
+      "云吞kumo.4096/texture_05.png",
+      "云吞kumo.4096/texture_06.png",
+      "云吞kumo.4096/texture_07.png",
+      "云吞kumo.4096/texture_08.png",
+      "云吞kumo.4096/texture_09.png",
+      "云吞kumo.4096/texture_10.png"
+    ],
+    "Physics": "云吞kumo.physics3.json",
+    "DisplayInfo": "云吞kumo.cdi3.json",
+    "Expressions": [
+      {
+        "Name": "Zzz",
+        "File": "Zzz.exp3.json"
+      },
+      {
+        "Name": "爱心",
+        "File": "爱心.exp3.json"
+      },
+      {
+        "Name": "哭泣",
+        "File": "哭泣.exp3.json"
+      },
+      {
+        "Name": "脸黑",
+        "File": "脸黑.exp3.json"
+      },
+      {
+        "Name": "脸红",
+        "File": "脸红.exp3.json"
+      },
+      {
+        "Name": "流汗",
+        "File": "流汗.exp3.json"
+      },
+      {
+        "Name": "手柄",
+        "File": "手柄.exp3.json"
+      },
+      {
+        "Name": "水印",
+        "File": "水印.exp3.json"
+      },
+      {
+        "Name": "瞳孔缩小",
+        "File": "瞳孔缩小.exp3.json"
+      },
+      {
+        "Name": "问号",
+        "File": "问号.exp3.json"
+      },
+      {
+        "Name": "开心",
+        "File": "kaixin.exp3.json"
+      },
+      {
+        "Name": "憋笑",
+        "File": "bengzhu.exp3.json"
+      },
+      {
+        "Name": "好奇",
+        "File": "haoqi.exp3.json"
+      },
+      {
+        "Name": "害怕",
+        "File": "haipa.exp3.json"
+      },
+      {
+        "Name": "困惑",
+        "File": "kunhuo.exp3.json"
+      },
+      {
+        "Name": "生气",
+        "File": "shengqi.exp3.json"
+      },
+      {
+        "Name": "淘气挑逗",
+        "File": "tiaodou.exp3.json"
+      },
+      {
+        "Name": "无语",
+        "File": "wuyu.exp3.json"
+      },
+      {
+        "Name": "委屈",
+        "File": "weiqu.exp3.json"
+      },
+      {
+        "Name": "兴奋",
+        "File": "xingfen.exp3.json"
+      },
+      {
+        "Name": "害羞",
+        "File": "haixiu.exp3.json"
+      },
+      {
+        "Name": "normal",
+        "File": "normal.exp3.json"
+      },
+      {
+        "Name": "挑逗",
+        "File": "tiaodou.exp3.json"
+      }
+    ]
+  },
+  "Groups": [
+    {
+      "Target": "Parameter",
+      "Name": "LipSync",
+      "Ids": []
+    },
+    {
+      "Target": "Parameter",
+      "Name": "EyeBlink",
+      "Ids": [
+        "ParamEyeLOpen",
+        "ParamEyeROpen"
+      ]
+    }
+  ],
+  "HitAreas": []
+}

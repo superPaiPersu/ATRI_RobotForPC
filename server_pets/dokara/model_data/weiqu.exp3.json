@@ -1,0 +1,97 @@
+{
+	"Type": "Live2D Expression",
+	"FadeInTime": 1,
+	"FadeOutTime": 1,
+	"Parameters": [
+		{
+			"Id": "CryButton",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamMouthForm",
+			"Value": -0.816,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeLOpen",
+			"Value": -0.423,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeROpen",
+			"Value": -0.434,
+			"Blend": "Add"
+		},
+		{
+			"Id": "fgx3",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "earlist",
+			"Value": 4,
+			"Blend": "Add"
+		},
+		{
+			"Id": "pupilList1",
+			"Value": 3.941,
+			"Blend": "Add"
+		},
+		{
+			"Id": "positiony",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLForm",
+			"Value": -0.338,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRY",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowLY",
+			"Value": -1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamBrowRForm",
+			"Value": -0.471,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamEyeBallY",
+			"Value": -0.625,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamAngleY",
+			"Value": -30,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamAngleX",
+			"Value": -16.103,
+			"Blend": "Add"
+		},
+		{
+			"Id": "BlackButton",
+			"Value": 0.496,
+			"Blend": "Add"
+		},
+		{
+			"Id": "eyeidley",
+			"Value": 30,
+			"Blend": "Add"
+		},
+		{
+			"Id": "eyeidlex",
+			"Value": 30,
+			"Blend": "Add"
+		}
+	]
+}

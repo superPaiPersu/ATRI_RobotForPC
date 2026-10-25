@@ -1,0 +1,63 @@
+main.py 配合修改（尚未自动修改 main.py）
+
+1. 在现有 import 区增加：
+
+from harness_bridge import PetHarnessBridge
+
+2. 在 GLWidget.config_llm() 中，紧接 self.load_dialogue_history() 后增加：
+
+self.harness_bridge = PetHarnessBridge(
+    search_callback=self.tags_match,
+    tags_callback=lambda: self.tags_lt,
+    username=get_arg("--username"),
+    pet_id=pet_id,
+).start()
+QApplication.instance().aboutToQuit.connect(self.harness_bridge.close)
+
+这些代码在 config_llm() 内需要和原有 self.load_dialogue_history() 保持相同缩进。
+aboutToQuit 的连接会在程序正常退出时关闭本地接口。
+
+3. 回调要求：
+
+search_callback(tags) 接收 ["日语", "兔子", ...]，可返回消息列表：
+[{"role": "user", "content": "原文"}, {"role": "assistant", "content": "原文"}]
+
+可以直接使用现有 self.tags_match，不需要调用 create_prompt，不会重新发起普通对话。
+目前 tags_match 返回最多五个会话索引；桥接模块从绑定对象的 tags_index_dict 展开原文，并从 tags_dict 校验完整字符串命中，排除零分会话。
+当前 tags_match 零命中时产生的 KeyError(None) 会转换成空消息列表；其他异常仍作为工具错误。
+
+tags_callback() 返回单层概念列表，如 ["日语","兔子","熬夜"]，self.tags_lt 使用此结构。保存成功后 AI_tools 自动刷新该列表和检索索引。
+标签如果使用字符串，请移除换行和首尾空格，确保和 tags_dict 中的概念标签完全一致。
+
+4. 运行机制：
+
+harness → MCP get_dialogue_tags / search_dialogue_history
+→ 127.0.0.1 本地 RPC → 桌宠当前内存回调 → 原始历史作为工具结果返回。
+
+不经过远程服务端，不依赖服务端请求客户端，也不改变普通 GPT、Gemini 的聊天路径。
+回调在后台线程执行，只读取历史数据，不要在回调里操作 Qt 控件。
+桥接模块只串行化自身的回调；如果其他线程也会修改 tags_dict、tags_index_dict，
+请在读取和修改两端使用同一把锁，或由你的检索方法生成一致的数据快照。
+
+5. 历史更新：
+
+每次调用都会查询当前对象，不会缓存一份旧历史。
+但前提是你已经把新历史和新标签更新到 tags_dict、tags_index_dict。
+AI_tools.save_dialogue_history 已请求服务端返回保存后的原文和标签，并在保存成功时自动刷新绑定对象的检索索引及 tags_lt；不改聊天上下文或提示词。
+
+6. 地址发现：
+
+默认登记目录为 client/client_data/harness_bridge。
+用户和 pet_id 必须与主客户端一致，地址和随机令牌自动登记，不需要指定固定端口。
+从源码直接运行当前项目时，上述示例无需额外设置路径。
+如果你将桌宠单独打包到其他目录，请显式传入：
+registry_dir="主客户端目录/client_data/harness_bridge"
+
+主客户端 harness_service.py 已在 MCP 配置中使用同一目录。
+本地 HTTP 请求强制绕过系统代理，避免受到 VPN HTTP 代理设置影响。
+桌宠异常退出后可遗留地址登记文件；下次启动同一用户和桌宠会自动替换登记信息。
+
+7. 生效：
+
+加入上述 main.py 代码后重启主客户端和桌宠，让新 MCP 工具列表加载。
+未启动桥接接口时历史工具返回明确错误，不会悄悄改用服务端旧历史。

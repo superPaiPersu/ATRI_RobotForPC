@@ -1,0 +1,56 @@
+{
+  "expressions": {
+    "normal": {
+      "mouth_open": 0.6,
+      "shake": 0
+    },
+    "开心": {
+      "mouth_open": 0.8,
+      "shake": 0
+    },
+    "害怕": {
+      "mouth_open": 0.4,
+      "shake": 0
+    },
+    "害羞": {
+      "mouth_open": 0.4,
+      "shake": 0
+    },
+    "憋笑": {
+      "mouth_open": 0.3,
+      "shake": 0
+    },
+    "生气": {
+      "mouth_open": 0.8,
+      "shake": 0
+    },
+    "好奇": {
+      "mouth_open": 0.6,
+      "shake": 0
+    },
+    "困惑": {
+      "mouth_open": 0.6,
+      "shake": 0
+    },
+    "挑逗": {
+      "mouth_open": 0.6,
+      "shake": 0
+    },
+    "无语": {
+      "mouth_open": 0.6,
+      "shake": 0
+    },
+    "委屈": {
+      "mouth_open": 0.4,
+      "shake": 0
+    },
+    "兴奋": {
+      "mouth_open": 0.8,
+      "shake": 0
+    }
+  },
+  "paramID": {
+    "mouthParam": "ParamMouthOpenY",
+    "shakeParam": "ParamBodyAngleZ"
+  }
+}

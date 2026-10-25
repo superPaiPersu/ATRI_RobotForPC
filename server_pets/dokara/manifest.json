@@ -1,0 +1,8 @@
+{
+    "id": "dokara",
+    "name": "云梓晴",
+    "description": "有些莫名其妙的少女",
+    "version": "1.0.0",
+    "entry": "main.py",
+    "tags": ["对话"]
+}

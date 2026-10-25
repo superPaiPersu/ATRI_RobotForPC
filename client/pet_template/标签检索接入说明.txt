@@ -1,0 +1,34 @@
+概念标签检索接入
+
+标签协议统一为 tags=["日语","兔子","熬夜"]，不再使用 [话题,记忆类型]。
+标签表唯一运行时来源是服务端 server/data/dialogue_tags，每行一个概念。
+保存时模型先读已有表，优先准确复用，无法表达才新增；对象、话题、行为和具体处境都可收录。
+喜欢、讨厌、否定、时间等含义保留在原文。检索只选择表中已有标签，不负责新增。
+
+main.py 已有的 self.AI_tool.set_history_search_callback(self.tags_match) 保持使用。
+tags_match 必须按完整字符串相等计分，返回最多五个会话索引；当前用户版本已经符合。
+AI_tools 负责把索引展开为原文并排除零分结果，普通模型及实时模型共用该链路。
+服务端 get_dialogue_tags 本地读表；search_dialogue_history 通过 Socket.IO ACK 向当前桌宠请求原文。
+无需 tag_require 或 history_require 标识符，也无需把协议塞进人设规则。
+
+AI_tools.save_dialogue_history 仍向 main.py 返回 "success"。
+内部请求保存元数据，并自动将服务端生成的 tags 与原文合并到已注册对象的检索索引，更新 tags_lt。
+这不会改动 all_dialogue_history、近期上下文、提示词或保存游标。
+已有 main.py 的 history_messages_to_jsonl 在 tags=None 时正常使用（现有 save_log 就是这样调用）。
+如果你以后主动传 tags 给这个序列化函数，其可选 tags 校验仍需由你从二元组改为字符串；本次未改 main.py。
+可将 history_messages_to_jsonl 开头的 session_tags 校验部分替换成：
+
+    session_tags = []
+    if tags is not None:
+        if not isinstance(tags, (list, tuple)) or any(
+            not isinstance(tag, str) or not tag.strip() for tag in tags
+        ):
+            raise ValueError("tags must be a list of non-empty concept strings")
+        session_tags = list(dict.fromkeys(tag.strip() for tag in tags))
+
+后面的会话起止和消息序列化保持原样。现有 save_log 不传 tags，无需这项修改也能运行。
+
+迁移已有记录：python -X utf8 server/backfill_history_tags.py --apply
+从完整原文重新提取概念，顺序批次复用前面新增的标签；缓存支持续跑，落盘前自动备份。
+旧 日常话题标签表.txt、记忆类型标签表.txt 和 server/data/tags_* 不再被运行时读取。
+更新后重启服务端、桌宠（如在用 Harness，还需重建/重启其工具进程）。

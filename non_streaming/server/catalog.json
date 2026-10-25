@@ -1,0 +1,80 @@
+[
+    {
+        "id": "cat_miku",
+        "name": "初音猫咪",
+        "description": "会唱歌的虚拟歌姬猫咪，性格活泼，喜欢用歌声治愈主人",
+        "version": "1.2.0",
+        "size_mb": 15.3,
+        "rating": 4.7,
+        "rating_count": 128,
+        "thumbnail_url": "/api/pets/cat_miku/thumbnail",
+        "tags": ["动漫", "猫咪", "音乐"],
+        "author": "初音工作室",
+        "created_at": "2026-05-20"
+    },
+    {
+        "id": "dog_hachi",
+        "name": "忠犬小八",
+        "description": "忠诚可爱的小狗，会在桌面上巡逻，偶尔撒娇打滚",
+        "version": "0.9.1",
+        "size_mb": 8.7,
+        "rating": 4.2,
+        "rating_count": 86,
+        "thumbnail_url": "/api/pets/dog_hachi/thumbnail",
+        "tags": ["治愈", "狗狗", "互动"],
+        "author": "萌宠工坊",
+        "created_at": "2026-05-15"
+    },
+    {
+        "id": "dragon_kali",
+        "name": "卡利小龙",
+        "description": "来自异世界的迷你龙，拥有喷火和飞行的能力，性格傲娇",
+        "version": "2.0.0",
+        "size_mb": 22.1,
+        "rating": 4.9,
+        "rating_count": 256,
+        "thumbnail_url": "/api/pets/dragon_kali/thumbnail",
+        "tags": ["奇幻", "龙", "冒险"],
+        "author": "幻想边界",
+        "created_at": "2026-05-10"
+    },
+    {
+        "id": "bunny_mochi",
+        "name": "麻糬兔",
+        "description": "软糯Q弹的兔子，喜欢胡萝卜和睡觉，被摸头会开心转圈",
+        "version": "1.0.3",
+        "size_mb": 6.4,
+        "rating": 4.5,
+        "rating_count": 67,
+        "thumbnail_url": "/api/pets/bunny_mochi/thumbnail",
+        "tags": ["治愈", "兔子", "休闲"],
+        "author": "甜品社",
+        "created_at": "2026-05-25"
+    },
+    {
+        "id": "atri",
+        "name": "ATRI",
+        "description": "来自《ATRI -My Dear Moments-》的机器人少女，搭载AI对话与语音合成",
+        "version": "1.0.0",
+        "size_mb": 25.0,
+        "rating": 4.8,
+        "rating_count": 192,
+        "thumbnail_url": "/api/pets/atri/thumbnail",
+        "tags": ["动漫", "AI对话", "Live2D"],
+        "author": "superpai",
+        "created_at": "2026-05-28"
+    },
+    {
+        "id": "dokara",
+        "name": "DOKARA",
+        "description": "有些莫名其妙的少女",
+        "version": "1.0.0",
+        "size_mb": 139.8,
+        "rating": 4.8,
+        "rating_count": 0,
+        "thumbnail_url": "/api/pets/dokara/thumbnail",
+        "tags": ["对话", "Live2D"],
+        "author": "superpai",
+        "created_at": "2026-06-22"
+    }
+]

@@ -1,0 +1,47 @@
+{
+	"Type": "Live2D Expression",
+	"FadeInTime": 1,
+	"FadeOutTime": 1,
+	"Parameters": [
+		{
+			"Id": "LoveButton",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "RedButton",
+			"Value": 1,
+			"Blend": "Add"
+		},
+		{
+			"Id": "earlist",
+			"Value": 1.015,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamAngleY",
+			"Value": -30,
+			"Blend": "Add"
+		},
+		{
+			"Id": "ParamAngleX",
+			"Value": -11.471,
+			"Blend": "Add"
+		},
+		{
+			"Id": "hartIdle2",
+			"Value": 1.691,
+			"Blend": "Add"
+		},
+		{
+			"Id": "hartIdle",
+			"Value": 6.14,
+			"Blend": "Add"
+		},
+		{
+			"Id": "hartIdle3",
+			"Value": 8.235,
+			"Blend": "Add"
+		}
+	]
+}

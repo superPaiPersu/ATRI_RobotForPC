@@ -1,0 +1,25 @@
+# Windows server runtime for the Flask + Socket.IO backend only.
+# Recommended Python: 3.10 or 3.11 (64-bit).
+
+Flask>=3.0,<4.0
+Flask-Cors>=6.0,<7.0
+Flask-SocketIO>=5.6,<6.0
+python-socketio>=5.16,<6.0
+simple-websocket>=1.1,<2.0
+requests>=2.31,<3.0
+mss>=9.0,<11.0
+Pillow>=10.0,<12.0
+rapidocr-onnxruntime>=1.3,<2.0
+
+# AI / third-party integrations imported by server/chat_ai.py
+openai[realtime]>=2.43,<3.0
+google-genai>=2.7,<3.0
+dashscope>=1.27.6,<2.0
+serpapi>=0.1,<1.0
+anthropic>=0.105,<1.0
+
+# NetEase integration imported by server/ncm.py
+pymusiclibrary>=0.0.4,<0.1
+
+# Speech-to-text websocket client imported by server/translator.py
+websocket-client>=1.9,<2.0

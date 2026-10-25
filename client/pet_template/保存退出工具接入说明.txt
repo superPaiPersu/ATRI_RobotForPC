@@ -1,0 +1,59 @@
+服务端保存、退出工具接入（未修改 main.py 和 rules.txt）
+
+1. main.py 创建 self.AI_tool 后注册：
+
+self.AI_tool.set_conversation_action_callback(self.save_log_async)
+
+也可在 SocketAI(...) 中传 conversation_action_callback=self.save_log_async，二选一。
+首次发起聊天或开启实时语音前完成注册；已开启的实时会话需要重新开启。
+
+2. 两个工具的对应关系：
+
+save_conversation() → conversation_action_request(action="save")
+→ AI_tools 调用 self.save_log_async(False)。
+
+end_conversation() → conversation_action_request(action="conversation-over")
+→ AI_tools 调用 self.save_log_async(True)。
+
+客户端收到请求后以 Socket.IO acknowledgement 回传相同 request_id。
+工具成功只表示调用异步入口，不能表示保存、总结、标签提取或退出已经完成。
+同一 request_id 重复送达不会重复执行，最多保留最近128次成功记录。
+服务端等待确认最多10秒；失去确认时不自动重试，因为客户端可能已执行。
+没有注册回调的客户端不会获得这两个服务端工具。
+适用于走服务端公共工具列表的普通模型，以及 Qwen/Gemini 实时工具链；
+客户端独立执行的 Harness MCP 工具列表本次没有新增这两个工具。
+
+3. rules.txt 配合：
+
+把 special 的保存、退出用途说明去掉；如果保留字段，固定填 "None"。
+保存和退出改为调用相应工具，避免一次回复同时通过工具与 special 重复触发。
+原来的 special 分支可以删除，或仅作为未启用工具的旧客户端兼容逻辑。
+目前实时分支 special="conversation-over" 调用的是 save_log_async(False)，
+普通分支是 True；新工具明确将结束动作映射到 True。
+
+4. 真正退出应用还需要 main.py 配合：
+
+当前 save_log_async 在 Thread 中运行 save_log；save_log 的 sys.exit() 只退出该线程。
+若希望整个桌宠退出，在 GLWidget 类体中新增信号：
+
+quit_after_save = pyqtSignal()
+
+在 GLWidget 初始化时连接到 Qt 主线程，例如：
+
+self.quit_after_save.connect(QApplication.instance().quit, Qt.ConnectionType.QueuedConnection)
+
+在 save_log 成功保存后的 if is_exit: 分支中，将 sys.exit() 改为：
+
+self.quit_after_save.emit()
+
+现在 save_log 的“没有活动会话”“没有新消息”“正在保存”分支会提前返回，
+所以也要明确这些情况下的退出策略：无新内容可直接发退出信号；正在保存时记录退出意图，
+等现有保存成功后再退出；保存失败不退出。不要因异步提交成功就立即关闭程序。
+
+5. 时机说明：
+
+工具调用会立即进入 save_log_async，不等待模型本轮后续回复、语音播放或历史追加。
+这和当前在 params 阶段处理 special 的时机一致。
+若要把本轮完整回复/告别也保存，注册你自己的调度回调：先记录保存/退出意图，
+等 main.py 完成本轮历史追加（需要的话再等播放结束）后，再调用 save_log_async(False/True)。
+不要在 Socket.IO 回调线程直接操作 Qt 控件。

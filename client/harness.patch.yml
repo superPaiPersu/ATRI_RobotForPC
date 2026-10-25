@@ -1,0 +1,8 @@
+- id: permission
+  config:
+    defaultPreset: workspace-write
+- id: approval
+  config:
+    policy: never
+- id: session-telemetry-otel
+  disabled: true

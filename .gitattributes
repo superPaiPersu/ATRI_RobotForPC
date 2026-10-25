@@ -1,0 +1,10 @@
+* text=auto
+*.py text eol=lf
+*.bat text eol=crlf
+*.png binary
+*.jpg binary
+*.ogg binary
+*.mp3 binary
+*.wav binary
+*.moc3 binary
+*.ttf binary
