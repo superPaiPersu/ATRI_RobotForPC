@@ -1,8 +1,0 @@
-{
-    "id": "mea",
-    "name": "梅尔",
-    "description": "来自《ATRI -My Dear Moments-》的机器人少女",
-    "version": "1.0.0",
-    "entry": "main.py",
-    "tags": ["ATRI", "机器人少女", "对话"]
-}

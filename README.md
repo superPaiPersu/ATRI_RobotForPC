@@ -1,12 +1,12 @@
 # ATRI_RobotForPC
 
-Python AI 桌宠平台源码，包含 PC 客户端、Socket.IO 服务端、宠物配置与资源，以及 non_streaming 备用实现。
+Python AI 桌宠平台源码，包含 PC 客户端、Socket.IO 服务端、宠物配置示例，以及 non_streaming 备用实现。
 
 ## 目录
 
 - `client/`：桌宠管理界面、模板、文件与屏幕工具、Harness 桥接。
 - `server/`：模型调用、实时语音、历史与标签、工具调度、TTS 适配。
-- `server_pets/`：宠物规则、人设、Live2D 与参考音频资源。
+- `server_pets/`：宠物规则、人设与配置示例；不包含素材资源。
 - `non_streaming/`：备用非流式实现。
 - `realtime_example/`：独立实时语音示例。
 
@@ -32,7 +32,7 @@ python server/run.py
 3. 服务端可用 `python server/run.py` 或 `run_server.bat` 启动；PC 管理界面可用 `python client/main.py` 启动。客户端连接地址在 `client/config.json`，发布默认值为 `http://127.0.0.1:5000`。
 4. TTS 配置参阅 `server/TTS_BACKENDS.md`；部署参阅 `SERVER_DEPLOY_WINDOWS.md`。部分本机模型/音频路径需要按实际环境调整。
 
-这是源码快照，不是开箱即用的安装包。未上传打包 EXE、_internal 运行库、宠物 ZIP、模型权重及本地缓存；涉及下载/启动已打包桌宠的流程需要自行准备对应构建与宠物包。原始参考音频及宠物素材保留。
+这是源码快照，不是开箱即用的安装包。未上传打包 EXE、_internal 运行库、宠物 ZIP、模型权重及本地缓存；涉及下载/启动已打包桌宠的流程需要自行准备对应构建与宠物包。Live2D、图片、动画、音乐、参考音频及字体等素材不上传，运行时需自行在本地准备。素材相关配置只作为示例保留。
 
 ## 发布安全
 

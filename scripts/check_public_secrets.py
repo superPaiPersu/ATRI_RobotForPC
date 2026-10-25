@@ -41,6 +41,8 @@ def staged_files(root):
             yield path, content
 
 def main():
+    asset_dirs = {'model_data', 'voice_refs', 'tts_refs', 'prefab_audio', 'init_musics', 'thumbnails'}
+    asset_extensions = {'.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.mp3', '.wav', '.ogg', '.flac', '.mp4', '.ttf', '.otf', '.moc3', '.can3', '.asset', '.prefab', '.anim', '.controller', '.meta'}
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--staged", action="store_true", help="Read staged blobs, not working-tree files")
     args = parser.parse_args()
@@ -51,6 +53,8 @@ def main():
     source = staged_files(root) if args.staged else ((p, (root/p).read_bytes()) for p in filter(None, paths))
     for relative, content in source:
         path = Path(relative)
+        if asset_dirs.intersection(path.parts) or path.suffix.lower() in asset_extensions:
+            failures.append((relative, 'material asset excluded from source-only repository'))
         if any(part in PRIVATE_DIRS or part.startswith((".sync-backup", ".history", ".backup")) for part in path.parts) or path.name in PRIVATE_NAMES or path.suffix in {".log", ".pem", ".key", ".pyc", ".db", ".exe", ".zip"} or ".bak" in path.name or (path.name.startswith(".env") and path.name != ".env.example"):
             failures.append((relative, "private/generated path"))
         for label, pattern in RULES.items():
